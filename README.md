@@ -1,6 +1,6 @@
 ## Description
 
-core-auth is a module for the authentication and authorization of generic applications.
+core-auth is a module for the authentication and authorization of [Devashish Sarmah](https://github.com/devashishSarmah)'s applications.
 
 ## Installation
 
