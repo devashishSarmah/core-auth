@@ -53,8 +53,7 @@ class ConfigService {
 }
 
 function getMigrationDirectory() {
-  const directory =
-    process.env.NODE_ENV === 'migration' ? 'src' : `${__dirname}`;
+  const directory = process.env.DIR ? process.env.DIR : `${__dirname}`;
   return `${directory}/migrations/**/*{.ts,.js}`;
 }
 
