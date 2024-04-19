@@ -41,15 +41,21 @@ class ConfigService {
       password: this.getValue('MYSQL_PASSWORD'),
       database: this.getValue('MYSQL_DATABASE'),
 
-      entities: ['**/*.entity{.ts,.js}'],
+      entities: [`${__dirname}/../**/*.entity.{ts,js}`],
 
       migrationsTableName: 'migration',
 
-      migrations: ['migrations/*.ts'],
+      migrations: [getMigrationDirectory()],
 
       ssl: this.isProduction(),
     };
   }
+}
+
+function getMigrationDirectory() {
+  const directory =
+    process.env.NODE_ENV === 'migration' ? 'src' : `${__dirname}`;
+  return `${directory}/migrations/**/*{.ts,.js}`;
 }
 
 const configService: ConfigService = new ConfigService(process.env);

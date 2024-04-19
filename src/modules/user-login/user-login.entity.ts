@@ -21,8 +21,10 @@ export class UserLogin {
 
   @CreateDateColumn({
     nullable: false,
+    type: 'int',
+    default: 0,
   })
-  login_time: Date;
+  login_time: number;
 
   @Column({
     type: 'varchar',
