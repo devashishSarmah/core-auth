@@ -15,14 +15,14 @@ export class UserLogin {
   @PrimaryGeneratedColumn('uuid')
   session_id: string;
 
-  @ManyToOne(() => User, { nullable: false })
+  @ManyToOne(() => User, { nullable: false, onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user_id' })
   user: User;
 
   @CreateDateColumn({
     nullable: false,
     type: 'int',
-    default: 0,
+    default: '0',
   })
   login_time: number;
 

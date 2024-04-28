@@ -1,6 +1,4 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import config from './config';
-
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -17,18 +15,23 @@ class ConfigService {
     return value;
   }
 
-  public ensureValues(keys: string[]) {
+  private ensureValues(keys: string[]) {
     keys.forEach((k: string) => this.getValue(k, true));
     return this;
   }
 
-  public getPort() {
-    return this.getValue('PORT', true);
+  private isProduction() {
+    const mode = this.getValue('MODE', false);
+    return mode === 'PROD';
   }
 
-  public isProduction() {
-    const mode = this.getValue('MODE', false);
-    return mode != config.ENVIRONMENT.DEV;
+  private provideSSL() {
+    return this.isProduction()
+      ? {
+          rejectUnauthorized: true,
+          ca: this.getValue('CA', true),
+        }
+      : false;
   }
 
   public getTypeOrmConfig(): TypeOrmModuleOptions {
@@ -47,7 +50,9 @@ class ConfigService {
 
       migrations: [getMigrationDirectory()],
 
-      ssl: this.isProduction(),
+      ssl: this.provideSSL(),
+
+      synchronize: !this.isProduction(),
     };
   }
 }
