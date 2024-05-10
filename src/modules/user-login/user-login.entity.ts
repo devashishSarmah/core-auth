@@ -19,12 +19,8 @@ export class UserLogin {
   @JoinColumn({ name: 'user_id' })
   user: User;
 
-  @CreateDateColumn({
-    nullable: false,
-    type: 'int',
-    default: '0',
-  })
-  login_time: number;
+  @CreateDateColumn()
+  login_time: Date;
 
   @Column({
     type: 'varchar',

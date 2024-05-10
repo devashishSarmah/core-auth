@@ -14,6 +14,10 @@ export class UserAiService {
     return this.userAIRepository.findOneBy({ ai_user_id: id });
   }
 
+  getAIUserClientSecret(client_id: UserAI['client_id']): Promise<UserAI> {
+    return this.userAIRepository.findOneBy({ client_id });
+  }
+
   createAIUser(userAI: UserAI): Promise<UserAI> {
     return this.userAIRepository.save(this.userAIRepository.create(userAI));
   }

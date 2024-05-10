@@ -11,3 +11,8 @@ export type AuthResponse = {
   username: User['username'];
   profile_picture: User['profile_picture_url'];
 };
+
+export type AIAuthRequest = {
+  token: string;
+  client_id: string;
+};

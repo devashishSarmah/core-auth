@@ -8,6 +8,8 @@ import { AIUserPayload, AIUserResponse, UserCreatePayload } from './user.model';
 import { UserAI } from '../user-ai/user-ai.entity';
 import { UserAiService } from '../user-ai/user-ai.service';
 
+import { generateKey, randomUUID } from 'crypto';
+
 @Injectable()
 export class UserService {
   constructor(
@@ -60,7 +62,13 @@ export class UserService {
       language_preference: _AIUserData.ai.language_preference,
       region: _AIUserData.ai.region,
       content_preferences: _AIUserData.ai.content_preferences,
+      client_id: randomUUID(),
     };
+
+    await generateKey('aes', { length: 128 }, (err, key) => {
+      if (err) throw err;
+      _AIUserPayload['client_secret'] = key.export().toString('hex');
+    });
 
     const aiUser = await this.userAIService.createAIUser(
       <UserAI>_AIUserPayload,

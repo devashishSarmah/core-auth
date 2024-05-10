@@ -32,4 +32,10 @@ export class UserAI {
 
   @Column({ nullable: true })
   content_preferences: string;
+
+  @Column({ nullable: false })
+  client_id: string;
+
+  @Column({ nullable: false })
+  client_secret: string;
 }

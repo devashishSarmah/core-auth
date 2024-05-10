@@ -13,7 +13,6 @@ export class UserLoginService {
   ) {}
 
   createUserLogin(userLoginData: Partial<UserLogin>): Promise<UserLogin> {
-    userLoginData.login_time = Math.floor(new Date().getTime() / 1000);
     userLoginData.ip_address =
       this.request.ip ||
       (this.request.headers['x-forwarded-for'] as string) ||
