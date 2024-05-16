@@ -31,7 +31,9 @@ class ConfigService {
     return this.isProduction()
       ? {
           rejectUnauthorized: true,
-          ca: fs.readFileSync(this.getValue('CA', true)),
+          ca: fs.readFileSync(this.getValue('SSL_CA', true)),
+          key: fs.readFileSync(this.getValue('SSL_KEY', true)),
+          cert: fs.readFileSync(this.getValue('SSL_CERT', true)),
         }
       : false;
   }
