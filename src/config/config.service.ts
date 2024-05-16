@@ -1,5 +1,6 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import * as dotenv from 'dotenv';
+import * as path from 'path';
 
 dotenv.config();
 
@@ -58,7 +59,8 @@ class ConfigService {
 }
 
 function getMigrationDirectory() {
-  const directory = process.env.DIR ? process.env.DIR : `${__dirname}`;
+  // const directory = process.env.DIR ? process.env.DIR : `${__dirname}`;
+  const directory = path.resolve(__dirname);
   return `${directory}/migrations/**/*{.ts,.js}`;
 }
 
