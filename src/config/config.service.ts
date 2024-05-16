@@ -1,6 +1,7 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import * as dotenv from 'dotenv';
 import * as path from 'path';
+import * as fs from 'fs';
 
 dotenv.config();
 
@@ -30,7 +31,7 @@ class ConfigService {
     return this.isProduction()
       ? {
           rejectUnauthorized: true,
-          ca: this.getValue('CA', true),
+          ca: fs.readFileSync(this.getValue('CA', true)),
         }
       : false;
   }
