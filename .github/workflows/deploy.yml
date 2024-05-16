@@ -19,6 +19,4 @@ jobs:
 
       - name: Copy files to EC2
         run: |
-          rsync -avz -e "ssh -o StrictHostKeyChecking=no" ./ ubuntu@ec2-13-201-186-54.ap-south-1.compute.amazonaws.com:/home/ubuntu/social
-          # You can also use scp if preferred:
-          # scp -r -o StrictHostKeyChecking=no ./ ubuntu@ec2-13-201-186-54.ap-south-1.compute.amazonaws.com:/home/ubuntu/social
+          rsync -avz -e "ssh -o StrictHostKeyChecking=no" ./ dev@139.59.41.3:/home/dev/api/social-auth
