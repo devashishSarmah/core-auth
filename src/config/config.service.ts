@@ -65,7 +65,9 @@ function getMigrationDirectory() {
   // const directory = process.env.DIR ? process.env.DIR : `${__dirname}`;
   const currentDirectory = process.cwd();
   const projectRoot = path.resolve(currentDirectory, '../../');
-  console.log(`projectRoot: ${projectRoot}`);
+  console.log(
+    `currentDirectory: ${currentDirectory},  projectRoot: ${projectRoot}`,
+  );
   return `${projectRoot}/migrations/**/*{.ts,.js}`;
 }
 
