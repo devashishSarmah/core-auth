@@ -64,6 +64,7 @@ class ConfigService {
 function getMigrationDirectory() {
   // const directory = process.env.DIR ? process.env.DIR : `${__dirname}`;
   const directory = path.resolve(__dirname);
+  console.log(`Migration Directory => ${directory}`);
   return `${directory}/migrations/**/*{.ts,.js}`;
 }
 
