@@ -1,9 +1,10 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import * as dotenv from 'dotenv';
-import * as path from 'path';
 import * as fs from 'fs';
 
-dotenv.config();
+const currentDirectory = process.cwd();
+
+dotenv.config({ path: `${currentDirectory}/.env` });
 
 class ConfigService {
   constructor(private env: { [k: string]: string | undefined }) {}
@@ -62,7 +63,6 @@ class ConfigService {
 }
 
 function getMigrationDirectory() {
-  const currentDirectory = process.cwd();
   return `${currentDirectory}/migrations/**/*{.ts,.js}`;
 }
 
