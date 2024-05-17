@@ -63,9 +63,9 @@ class ConfigService {
 
 function getMigrationDirectory() {
   // const directory = process.env.DIR ? process.env.DIR : `${__dirname}`;
-  const directory = path.resolve(__dirname);
-  console.log(`Migration Directory => ${directory}`);
-  return `${directory}/migrations/**/*{.ts,.js}`;
+  const currentDirectory = process.cwd();
+  const projectRoot = path.resolve(currentDirectory, '../../');
+  return `${projectRoot}/migrations/**/*{.ts,.js}`;
 }
 
 const configService: ConfigService = new ConfigService(process.env);
