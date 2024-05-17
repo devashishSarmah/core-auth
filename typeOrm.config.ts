@@ -1,4 +1,15 @@
 import { DataSource } from 'typeorm';
-import configService from 'src/config/config.service';
+import { ConfigService } from '@nestjs/config';
+import { typeOrmConfig, appConfig } from './src/app.config';
+import { ConfigModule } from '@nestjs/config';
 
-export default new DataSource(<any>configService.getTypeOrmConfig());
+ConfigModule.forRoot({
+  isGlobal: true,
+  envFilePath: ['.env'],
+  load: [appConfig],
+});
+
+const configService = new ConfigService();
+const dataSource = new DataSource(<any>typeOrmConfig(configService));
+
+export default dataSource;
