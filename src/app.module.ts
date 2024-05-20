@@ -13,7 +13,6 @@ import { appConfig, typeOrmConfig } from './app.config';
     UserModule,
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: ['.env'],
       load: [appConfig],
     }),
     TypeOrmModule.forRootAsync({
