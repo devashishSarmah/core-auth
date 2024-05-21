@@ -1,6 +1,6 @@
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import fs from 'fs';
+import * as fs from 'fs';
 
 export const appConfig = () => ({
   mode: process.env.MODE,
