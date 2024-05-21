@@ -45,11 +45,9 @@ export class AuthService {
 
   async loginAI(authRequest: AIAuthRequest): Promise<AuthResponse> {
     function verifyToken(token, clientId, clientSecret) {
-      const secretKey = 'your-secret-key'; // Must be the same key used for encryption
-
       let bytes;
       try {
-        bytes = AES.decrypt(token, secretKey);
+        bytes = AES.decrypt(token, clientSecret);
       } catch (error) {
         return false; // Invalid token
       }
@@ -72,7 +70,7 @@ export class AuthService {
     const isValid = verifyToken(
       authRequest.token,
       authRequest.client_id,
-      aiUser.client_id,
+      aiUser.client_secret,
     );
 
     if (!isValid) {
