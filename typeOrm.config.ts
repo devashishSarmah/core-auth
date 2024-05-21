@@ -2,10 +2,12 @@ import { DataSource } from 'typeorm';
 import { ConfigService } from '@nestjs/config';
 import { typeOrmConfig, appConfig } from './src/app.config';
 import { ConfigModule } from '@nestjs/config';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 ConfigModule.forRoot({
   isGlobal: true,
-  envFilePath: ['.env'],
   load: [appConfig],
 });
 

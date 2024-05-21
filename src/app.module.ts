@@ -6,11 +6,6 @@ import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { appConfig, typeOrmConfig } from './app.config';
-import * as path from 'path';
-
-const envFilePath = path.resolve(process.cwd(), '.env');
-
-console.log(`Environment: ${envFilePath}`);
 
 @Module({
   imports: [
@@ -19,7 +14,6 @@ console.log(`Environment: ${envFilePath}`);
     ConfigModule.forRoot({
       isGlobal: true,
       load: [appConfig],
-      envFilePath: envFilePath,
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
