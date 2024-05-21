@@ -10,6 +10,8 @@ import * as path from 'path';
 
 const envFilePath = path.resolve(process.cwd(), '.env');
 
+console.log(`Environment: ${envFilePath}`);
+
 @Module({
   imports: [
     AuthModule,

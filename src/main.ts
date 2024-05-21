@@ -5,6 +5,8 @@ import * as path from 'path';
 
 const envFilePath = path.resolve(process.cwd(), '.env');
 
+console.log(`Environment: ${envFilePath}`);
+
 dotenv.config({ path: envFilePath });
 
 async function bootstrap() {
