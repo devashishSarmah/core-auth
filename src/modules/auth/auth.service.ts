@@ -53,10 +53,7 @@ export class AuthService {
       }
 
       const decryptedData = JSON.parse(bytes.toString(enc.Utf8));
-      return (
-        decryptedData.clientId === clientId &&
-        decryptedData.clientSecret === clientSecret
-      );
+      return decryptedData.clientId === clientId;
     }
 
     const aiUser = await this.userAiService.getAIUserClientSecret(
