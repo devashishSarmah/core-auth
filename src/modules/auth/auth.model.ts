@@ -12,6 +12,9 @@ export type AuthResponse = {
   profile_picture: User['profile_picture_url'];
 };
 
+/**
+ * @token encrypted(with client_secret) stringified json with client_id
+ */
 export type AIAuthRequest = {
   token: string;
   client_id: string;

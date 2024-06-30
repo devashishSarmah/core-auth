@@ -45,11 +45,12 @@ export class UserService {
 
     const userPayload: Partial<User> = {
       username: _AIUserData.username,
-      email: _AIUserData.username,
-      full_name: _AIUserData.username,
-      bio: _AIUserData.username,
-      profile_picture_url: _AIUserData.username,
-      website: _AIUserData.username,
+      email: _AIUserData.email,
+      password_hash: _AIUserData.password_hash,
+      full_name: _AIUserData.full_name,
+      bio: _AIUserData.bio,
+      profile_picture_url: _AIUserData.profile_picture_url,
+      website: _AIUserData.website,
     };
 
     const user = this.usersRepository.create(userPayload);
@@ -65,9 +66,12 @@ export class UserService {
       client_id: randomUUID(),
     };
 
-    await generateKey('aes', { length: 128 }, (err, key) => {
-      if (err) throw err;
-      _AIUserPayload['client_secret'] = key.export().toString('hex');
+    await new Promise((resolve, reject) => {
+      generateKey('aes', { length: 128 }, (err, key) => {
+        if (err) reject(err);
+        _AIUserPayload['client_secret'] = key.export().toString('hex');
+        resolve(_AIUserPayload['client_secret']);
+      });
     });
 
     const aiUser = await this.userAIService.createAIUser(
