@@ -15,7 +15,12 @@ export class UserAiService {
   }
 
   getAIUserClientSecret(client_id: UserAI['client_id']): Promise<UserAI> {
-    return this.userAIRepository.findOneBy({ client_id });
+    return this.userAIRepository.findOne({
+      where: {
+        client_id,
+      },
+      relations: ['user'],
+    });
   }
 
   createAIUser(userAI: UserAI): Promise<UserAI> {
