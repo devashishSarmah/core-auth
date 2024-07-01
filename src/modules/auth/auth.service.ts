@@ -74,7 +74,7 @@ export class AuthService {
       throw new Error('Token not valid');
     }
 
-    console.log(aiUser);
+    console.log(aiUser, aiUser.user);
 
     const userLoginData = await this.userLoginService.createUserLogin({
       user: aiUser.user,
