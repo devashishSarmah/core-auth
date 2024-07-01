@@ -7,6 +7,7 @@ import { compare } from 'bcrypt';
 import { UserAiService } from '../user-ai/user-ai.service';
 
 import { AES, enc } from 'crypto-js';
+import { UserAI } from '../user-ai/user-ai.entity';
 
 @Injectable()
 export class AuthService {
@@ -43,7 +44,9 @@ export class AuthService {
     return authResponse;
   }
 
-  async loginAI(authRequest: AIAuthRequest): Promise<AuthResponse> {
+  async loginAI(
+    authRequest: AIAuthRequest,
+  ): Promise<AuthResponse & Partial<UserAI>> {
     function verifyToken(token, clientId, clientSecret) {
       let bytes;
       try {
@@ -84,6 +87,13 @@ export class AuthService {
       token: userLoginData.session_id,
       username: aiUser.user.username,
       profile_picture: aiUser.user.profile_picture_url,
+      ai_user_id: aiUser.ai_user_id,
+      user: aiUser.user,
+      personality_type: aiUser.personality_type,
+      activity_pattern: aiUser.activity_pattern,
+      language_preference: aiUser.language_preference,
+      region: aiUser.region,
+      content_preferences: aiUser.content_preferences,
     };
   }
 }
